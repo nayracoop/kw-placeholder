@@ -14,9 +14,20 @@
             /* Width and height define width and height of logo*/
             width: 700px;
             height: 700px;
+            /* CLIP MASK, escondida temporalmente para poder ver bien la animacion */
             /* clip-path: url(#mask);
             -webkit-clip-path: url(#mask); */
         }
+
+        /* A partir de aca es la animacion de la luz
+         * El position absolute y ubicacion es clave para que se vea bien en la clip mask 
+         * A medida que se toca la animacion, ir poniendo y sacando la mascara para ver la diferencia
+         * La mascara es medio rara entonces agrega espacios y cosas inesperadas 
+         *
+         *  FALTA HACER
+         *    - Animacion en elipse como video
+         *    - Hacerlo bien responsive que quede lindo (media queries o lo que sea)
+         */
 
         #light-updown {
             position:absolute;
