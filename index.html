@@ -5,109 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ken Wilber</title>
     <style>
+        html, body {
+            height: 100%;
+        }
+
         body {
             background-color: #0d0218;
-        }
-        #canvas {
-            background-color: #0d0218;
-            margin: 4rem auto;
-            /* Width and height define width and height of logo*/
-            width: 700px;
-            height: 700px;
-            /* CLIP MASK, escondida temporalmente para poder ver bien la animacion */
-            /* clip-path: url(#mask);
-            -webkit-clip-path: url(#mask); */
+            margin: 0;
+            padding: 0;
         }
 
-        /* A partir de aca es la animacion de la luz
-         * El position absolute y ubicacion es clave para que se vea bien en la clip mask 
-         * A medida que se toca la animacion, ir poniendo y sacando la mascara para ver la diferencia
-         * La mascara es medio rara entonces agrega espacios y cosas inesperadas 
-         *
-         *  FALTA HACER
-         *    - Animacion en elipse como video
-         *    - Hacerlo bien responsive que quede lindo (media queries o lo que sea)
-         */
+        #container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
 
-        #light-updown {
-            position:absolute;
-            left: 50%;
+        #content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-content: center;
+            justify-content: center;
+        }
+
+        #content img {
+            display: block;
+            width: 80%;
+            height: auto;
+            max-width: 950px;
+        }
+
+        #mask {
+            position: absolute;
+            width: 2000px;
+            height: 2000px;
             top: 50%;
-            width: 50px;
-            height: 50px;
-            animation: updown 2s infinite ease-in-out alternate;
-        }
-
-        #light {
-            margin: 5rem auto;
-            width: 100px;
-            height: 100px;
-            position: absolute;
+            left: 50%;
+            margin-left: -1000px;
+            margin-top: -1000px;
+            background: radial-gradient(circle, rgba(13,2,24,0) 0%, rgba(13,2,24,1) 15%);
+            filter: blur(25px);
             will-change: transform;
-            transform-origin: center;
-            transform: translate(100px, 50px);
-            animation: circle 4s infinite linear;
+            animation: mask 20s ease-in-out infinite;
+            transform-origin: center 55%;
         }
 
-        #light::after {
-            content: ' ';
-            background-color: rgba(115,111,111,0.75);
-            box-shadow: 0px 0px 100px 100px rgba(115,111,111,0.75);
-            -webkit-box-shadow: 0px 0px 100px 100px rgba(115,111,111,0.75);
-            -moz-box-shadow: 0px 0px 100px 100px rgba(115,111,111,0.75);
-            position: absolute;
-            width: 1px;
-            left: 100px;
-            height: 1px;
-            transform: translate(100px, 50px);
-
-
+        @keyframes mask {
+            0% { transform: translateX(-25vw) translateY(12%); }
+            50% { transform: translateX(20vw) translateY(-15%) rotate(180deg); }
+            95% { transform: translateX(-25vw) rotate(360deg)  translateY(12%); }
         }
-
-
-        @keyframes orbit {
-            /* 0 & 100% might not be needed */
-            10% {
-                transform: rotate(6deg) translate(50px, 15px);
-            }
-            30% {
-                transform: rotate(6deg) translate(150px, 5px);
-            }
-            50% {
-                transform: rotate(6deg) translate(200px, -5px);
-            }
-            80% {
-                transform: rotate(6deg) translate(150px, -10px);
-            }
-            90% {
-                transform: rotate(6deg) translate(50px, -15px);
-            }
-        }
-
-        @keyframes updown {
-            to { transform: translateY(200px); } 
-        }
-
-        @keyframes circle { 
-            to { transform: rotate(1turn); } 
-        }
-
     </style>
 </head>
 <body>
-    <div id="canvas">
-        <div id="light-updown">
-            <div id="light"></div>
+    <div id="container">
+        <div id="content">
+            <img src="kw-logo.svg" />
         </div>
-    </div>
-    <div class="svg-wrapper">
-        <svg class="svg-clip" height="0" width="auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 0.187" preserveAspectRatio="xMinYMin meet">
-            <defs>
-                <clipPath id="mask" clipPathUnits="objectBoundingBox">
-                    <path d="M.068 0h.054v.187H.068zM0 .068h.187v.054H0zm.206.051V.07h.006v.05zM.22.096L.218.095V.094c0-.001 0-.002.002-.003L.254.067l.004.005-.031.022.032.022L.256.12zM.268.12C.266.12.265.12.265.116V.072C.265.07.266.069.268.069h.045v.006H.271v.038h.043V.12zM.305.095V.09h.007v.006zm.029-.02H.328V.12H.322V.072c0-.002 0-.003.003-.003h.012l.037.039-.005.004zM.38.12V.07h.006v.05zm.082 0H.46L.459.118.445.087.43.117C.43.12.43.12.427.12h-.01L.414.118.392.07.398.067l.02.046h.007L.442.078C.443.076.444.076.445.076s.002 0 .003.002l.015.035H.47L.492.067.498.07.475.118.473.119H.462zm.042 0V.07H.51v.05zm.02 0C.522.12.52.12.52.116V.07h.006v.044h.04V.12zm.052 0C.574.12.573.12.573.116V.072C.573.07.574.069.576.069h.045l.005.003A.01.01 0 01.63.076a.022.022 0 010 .013v.002L.625.093H.63L.63.097V.1l.001.005v.007a.008.008 0 01-.003.004.014.014 0 01-.006.003.05.05 0 01-.01 0zM.613.113H.62L.624.11.626.108V.104.1.098L.622.097H.621L.619.094V.093.091H.62L.622.089h.001L.624.085V.084.079A.004.004 0 00.622.077.01.01 0 00.618.075a.05.05 0 00-.006 0H.579v.038zM.644.12C.642.12.641.12.641.116V.072C.641.07.642.069.644.069H.69v.006H.647v.038H.69V.12zM.681.095V.09h.006v.006zM.75.12V.11.106L.748.104.747.102H.744L.742.099V.097h.002L.747.094.75.094.75.092V.088.08A.006.006 0 00.747.077.01.01 0 00.742.075H.703V.12H.698V.072C.697.07.7.069.701.069h.044l.007.003a.01.01 0 01.003.005l.001.009a.035.035 0 010 .009L.753.097.75.1l.002.002.001.001.001.003V.119H.75zm.016 0V.111h.007V.12zM.84.103V.11L.837.113a.008.008 0 01-.002.004.015.015 0 01-.005.002H.822a.13.13 0 01-.01.001H.807A.128.128 0 01.79.12.013.013 0 01.784.117.01.01 0 01.782.113.014.014 0 01.78.108V.087.08c0-.002 0-.003.002-.005A.01.01 0 01.784.072.014.014 0 01.79.07L.796.069h.016a.13.13 0 01.018 0l.005.003.002.003L.84.08v.007H.833V.08A.005.005 0 00.83.077.014.014 0 00.824.075a.14.14 0 00-.012 0H.807a.205.205 0 00-.014 0 .01.01 0 00-.004.002s-.002 0-.002.002v.003L.785.087v.019A.01.01 0 00.787.11l.002.002.004.001a.208.208 0 00.014 0h.017L.83.112A.005.005 0 00.832.109V.103H.84zM.874.12A.128.128 0 01.856.12.013.013 0 01.85.117.01.01 0 01.848.113.014.014 0 01.847.108V.087.08L.848.075A.01.01 0 01.851.072.014.014 0 01.856.07L.863.069h.02a.13.13 0 01.018 0l.005.003.003.003L.91.08V.108L.909.113a.009.009 0 01-.003.004.014.014 0 01-.005.002H.894a.13.13 0 01-.01.001zm.03-.033V.08A.005.005 0 00.9.077.014.014 0 00.895.075a.14.14 0 00-.012 0h-.01a.205.205 0 00-.014 0 .01.01 0 00-.003.002c-.001 0-.002 0-.002.002L.853.082v.024a.01.01 0 000 .004l.003.002.003.001a.208.208 0 00.014 0h.01a.14.14 0 00.012 0L.901.112A.005.005 0 00.904.108V.101zm.09.032V.075H.986L.963.114.96.116S.958.116.958.114L.933.075H.926V.12H.92V.072C.92.07.92.069.923.069h.012L.938.07.96.106.982.07h.001L.985.068h.012c.002 0 .003 0 .003.003v.047z"></path>
-                </clipPath>
-            </defs>
-        </svg>
+        <div id="mask">
+        </div>
     </div>
 </body>
 </html>
